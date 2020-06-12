@@ -31,7 +31,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> : Fragment(), K
         import(fragmentModule)
     }
 
-    private val viewModelFactory: ViewModelProvider.Factory by instance<ViewModelProvider.Factory>()
+    private val viewModelFactory by instance<ViewModelProvider.Factory>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
