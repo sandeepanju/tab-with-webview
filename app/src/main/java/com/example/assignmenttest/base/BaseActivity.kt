@@ -20,9 +20,17 @@ import org.kodein.di.generic.singleton
 abstract class BaseActivity<B : ViewDataBinding,Vm : ViewModel>: AppCompatActivity(),KodeinAware{
    protected lateinit var binding: B
    protected lateinit var viewModel: Vm
+
+    // todo Get the "global" application kodein.
     private val parentKodien by closestKodein()
+
+    /*todo Using retainedKodein instead of Kodein ensures that
+       the Kodein object is retained and not recreated between activity restarts.*/
     override val kodein by retainedKodein {
+        // todo 	Extends the "global" application kodein, to be able to access, with this new Kodein object,
+        //  all bindings defined at the application level
         extend(parentKodien,copy = Copy.All)
+        // todo activity specific bindings
         bind<Activity>() with singleton { this@BaseActivity }
         bind<Context>("ActivityContext") with singleton { this@BaseActivity }
         import(activityModule)

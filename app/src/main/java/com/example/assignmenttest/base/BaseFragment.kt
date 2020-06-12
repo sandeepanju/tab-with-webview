@@ -24,10 +24,15 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> : Fragment(), K
     lateinit var viewModel: VM
 
     override val kodeinContext: KodeinContext<*> get() = kcontext(activity)
+
+    // todo Get the "global" application kodein.
     private val _parentKodein by closestKodein()
 
     override val kodein: Kodein = Kodein.lazy {
+        // todo 	Extends the "global" application kodein, to be able to access, with this new Kodein object,
+        //  all bindings defined at the application level
         extend(_parentKodein)
+        // todo Activity/fragment specific bindings
         import(fragmentModule)
     }
 
