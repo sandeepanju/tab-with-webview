@@ -23,7 +23,7 @@ class MainViewModel(context: Context): BaseViewModel(),KodeinAware{
     val imageResponse: MutableLiveData<ViewState<List<MNews>>> = MutableLiveData()
 
    fun getImageList(apikey:String){
-      viewModelScope.launch {
+       viewModelScope.launch(Dispatchers.IO) {
           val response =apiService.getNewsList(apiKey = apikey)
        withContext(Dispatchers.Main){
            try {
