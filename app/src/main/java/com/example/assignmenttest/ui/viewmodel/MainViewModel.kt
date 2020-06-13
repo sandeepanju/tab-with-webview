@@ -22,22 +22,4 @@ class MainViewModel(context: Context): BaseViewModel(),KodeinAware{
     private val apiService by instance<ApiService>()
     val imageResponse: MutableLiveData<ViewState<List<MNews>>> = MutableLiveData()
 
-   fun getImageList(apikey:String){
-       viewModelScope.launch(Dispatchers.IO) {
-          val response =apiService.getNewsList(apiKey = apikey)
-       withContext(Dispatchers.Main){
-           try {
-               if (response.isSuccessful) {
-                   imageResponse.postValue(ViewState.Success(response.body()?.articles!!))
-               } else {
-                  imageResponse.postValue(ViewState.Error(response.errorBody().toString()))
-               }
-           } catch (e: HttpException) {
-               imageResponse.postValue(ViewState.Error(e.message()))
-           } catch (e: Throwable) {
-               imageResponse.postValue(ViewState.Error(e.toString()))
-           }
-       }
-      }
-    }
 }
