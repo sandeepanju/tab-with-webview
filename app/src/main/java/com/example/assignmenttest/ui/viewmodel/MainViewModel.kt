@@ -1,16 +1,13 @@
 package com.example.assignmenttest.ui.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.beust.klaxon.*
 import com.example.assignmenttest.base.BaseViewModel
-import com.example.assignmenttest.ui.model.MNews
 import com.example.assignmenttest.ui.model.ViewState
 import com.example.assignmenttest.util.ApiService
 import com.example.assignmenttest.util.decodePoly
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,10 +16,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.kcontext
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
 import java.net.URL
 
 class MainViewModel(context: Context): BaseViewModel(),KodeinAware{
